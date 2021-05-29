@@ -53,7 +53,10 @@ app.post("/login", (req, res) => {
     });
 });
 
+//This is for getting the lyrics of the scoping
+//The get request receives both the artist and the title of the song
 app.get("/lyrics", async(req, res) => {
+    //Uses async function to get lyrics from lyrics finder
     const lyrics = await lyricsFinder(req.query.artist, req.query.track) || "No lyrics found";
     res.json({lyrics});
 });
