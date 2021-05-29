@@ -1,3 +1,4 @@
+require("dotenv").config();  
 const express = require("express");
 const cors = require("cors"); //This is for that Cors policy thing 
 const bodyParser = require("body-parser");
@@ -14,9 +15,9 @@ app.use(bodyParser.json());
 app.post("/refresh", (req, res) => {
     const refreshToken = req.body.refreshToken;
     const spotifyApi = new SpotifyWebApi({
-        redirectUri: "http://localhost:3000",
-        clientId: "0c9eb454ffc2431cabd8ddc114204945",
-        clientSecret: "82ff62c1e12949dcb8f01a9ae99a99dc",
+        redirectUri: process.env.REDIRECT_URI,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
         refreshToken
     });
 
@@ -35,9 +36,9 @@ app.post("/refresh", (req, res) => {
 app.post("/login", (req, res) => {
     const code = req.body.code; // The authentication code passed from the front
     const spotifyApi = new SpotifyWebApi({
-        redirectUri: "http://localhost:3000",
-        clientId: "0c9eb454ffc2431cabd8ddc114204945",
-        clientSecret: "82ff62c1e12949dcb8f01a9ae99a99dc"
+        redirectUri: process.env.REDIRECT_URI,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
     });
 
     //This uses the code to give an access token
